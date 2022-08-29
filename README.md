@@ -9,7 +9,7 @@
  - Arrow keys to switch `playbackRate` and the progress
    > Press <key>shift</key> at the same time to modify less
 
- - <key>Space</key> to start \/ stop
+ - <key>Space</key> to start / stop
 
  - <key>Enter</key> to start fullscreen mode
 
