@@ -2,7 +2,7 @@
 // @name         EduZhiXin Controller
 // @name:zh-cn   质心教育视频播放控制器
 // @namespace    eduzhixincontroller
-// @version      0.2
+// @version      0.3
 // @description  Use arrow keys to control the video of EduZhixin.
 // @author       _Kerman
 // @match        https://www.eduzhixin.com/page/live/**
@@ -50,6 +50,7 @@
 
     function main(){
         let v = document.getElementsByTagName("video")[0];
+        let loadedTag = document.getElementsByClassName("prism-progress-loaded")[0];
 
         if(!v){
             retryCnt++;
@@ -115,10 +116,20 @@
         bkgr.style.bottom="0px"
 
 
+        let progLoaded = document.createElement("div")
+        progLoaded.style.position = "fixed"
+        progLoaded.style.background="#555555"
+        progLoaded.style.zIndex=100001
+        progLoaded.style.width="0%"
+        progLoaded.style.left="0"
+        progLoaded.style.fontSize=fontSize;
+        progLoaded.style.height="1.2em"
+        progLoaded.style.bottom="0px"
+
         let prog = document.createElement("div")
         prog.style.position = "fixed"
         prog.style.background="grey"
-        prog.style.zIndex=100001
+        prog.style.zIndex=100002
         prog.style.width="0%"
         prog.style.left="0"
         prog.style.fontSize=fontSize;
@@ -130,7 +141,7 @@
         tip.style.position = "fixed"
         tip.style.background="transparent"
         tip.style.color="white"
-        tip.style.zIndex=100002
+        tip.style.zIndex=100003
         tip.style.width="100%"
         tip.style.left="0"
         tip.style.fontSize=fontSize;
@@ -140,6 +151,7 @@
         tip.style.fontFamily="Cascadian,Consolas"
 
         v.parentElement.parentElement.appendChild(bkgr)
+        v.parentElement.parentElement.appendChild(progLoaded)
         v.parentElement.parentElement.appendChild(prog)
         v.parentElement.parentElement.appendChild(tip)
 
@@ -161,7 +173,9 @@
             update();
         });
 
-        window.player._switchLevel(window.player._hls.levels[2].url)
+        setTimeout(()=>{
+            window.player._switchLevel(window.player._hls.levels[2].url)
+        },1000)
 
         function setTmpMsg(m,out = 3000){
             tmpMsg=m;
@@ -185,12 +199,15 @@
 
             let m = tmpMsg??msg;
 
+            //let loadedPercent = parseInt(loadedTag.style.width.slice(0,-1));
+
             tip.innerHTML=
                 `<div style="position:absolute;left:5%">${fmtSec(v.currentTime)} / ${fmtSec(v.duration)} (${(100*v.currentTime/v.duration).toFixed()}%)</div>
             <div style="position:absolute;left:40%">x${v.playbackRate.toFixed(1)}</div>
             <div style="position:absolute;left:70%">${m}</div>
             <div style="float:right;font-size:smaller">${hour}:${minute}</div>`
             prog.style.width=(100*v.currentTime/v.duration)+"%"
+            progLoaded.style.width=loadedTag.style.width
 
             document.querySelector(".proton-award-box .confirm-button")?.click()
         }
