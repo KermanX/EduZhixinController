@@ -1,16 +1,16 @@
-# EduZhixin Controller
+# EduZhixin Controller | 质心教育在线视频控制器
 
 ### Usage
 
-1. Install Tempermonkey.
+1. Install the browser extension **Tempermonkey**.
 2. Goto https://greasyfork.org/zh-CN/scripts/449535-eduzhixin-controller to install this script.
 3. Open https://www.eduzhixin.com/page/live/** to use it.
 
- - Arrow keys to switch `playbackRate` and the progress.
-   > Press <key>shift</key> at the same time to modify less.
+ - <kbd>Arrow keys</kbd> to switch `playbackRate` and the progress.
+   Press <kbd>shift</kbd> at the same time to modify less.
 
- - <key>Space</key> to start / stop.
+ - <kbd>Space</kbd> to start / stop.
 
- - <key>Enter</key> to start fullscreen mode.
+ - <kbd>Enter</kbd> to start fullscreen mode.
 
- - <key>Esc</key> to escape from fullscreen mode.
+ - <kbd>Esc</kbd> to escape from fullscreen mode.
